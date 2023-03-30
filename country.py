@@ -6,12 +6,13 @@ class Country:
 
     list_countries = list()
     filtered_result = list()
-    query = Query()
+    
     
     def __init__(self):
         self.table_name = "country"
         self.name = str()
         self.id = int()
+        self.query = Query()
     
     def get_countries(self):
         result = self.query.select_from_table(self.table_name)
