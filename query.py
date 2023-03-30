@@ -11,7 +11,8 @@ class Query(SQL_connectie):
     def select_from_table(self, tablename, table = None):
 
         # check if connection is alive before excecuting
-        self.connection_alive
+        # if self.connection_alive == False:
+        
                     
         table_query = Table(tablename,self.meta_data,autoload_with=self.connection.engine)
         if(table != None):

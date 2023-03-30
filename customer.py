@@ -1,4 +1,5 @@
 from sqlalchemy import Table, Column, select
+from address import Address
 from connectie_db import SQL_connectie
 from query import Query
 
@@ -7,7 +8,6 @@ class Customer():
     list_customers = list()
     filtered_result = list()
     query = Query()
-    
     def __init__(self):
         self.tablename = "customer"
         self.customer_id = int()
@@ -16,11 +16,14 @@ class Customer():
         self.last_name = str()
         self.full_name = str()
         self.email = str()
-        self.address_id = str()                 
+        self.address_id = str()
+        self.address_name = str()
+                   
 
-    def get_customers(self):
+    def get_customers(self, adr):
         # get all customers from db
         customers = self.query.select_from_table(self.tablename)
+        address = adr
         #iterate the customers from db and store them in the list_customers list
         for customer in customers:
         
@@ -32,6 +35,7 @@ class Customer():
             c.full_name = c.first_name + " " + c.last_name
             c.email = customer[4]
             c.address_id = customer[5]
+            c.address_name = address.find_by_id(c.address_id)
             
             self.list_customers.append(c)
  
@@ -54,7 +58,7 @@ class Customer():
     
     def __str__(self):
         print(f"Name:        {self.full_name}")
-        print(f"Address:     {self.address_id}")
+        print(f"Address:     {self.address_name}")
         print(f"Customer ID: {self.customer_id}")
         print(f"Store ID:    {self.store_id}")
         print(f"email:       {self.email}")

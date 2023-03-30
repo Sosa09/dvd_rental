@@ -1,6 +1,6 @@
 import sqlalchemy
 class SQL_connectie:
-    def __init__(self, db="dvd_rental", host="localhost:5432"):
+    def __init__(self, db="dvdrental", host="localhost:5432"):
         # //open connection
         self.engine = None
         self.db = db
@@ -9,6 +9,7 @@ class SQL_connectie:
         self.connection = None
         self.connection_succes = False
         self.open_db_connection() 
+        
                     
     def open_db_connection(self):
         # TODO add precheck like do you want tu use self.db as db if yes continue no ask user to put the db name he wants to use
@@ -28,8 +29,8 @@ class SQL_connectie:
             self.meta_data = sqlalchemy.MetaData()
             self.connection_succes = True
         except Exception as e:
-            print(e)
-            print("connection failed try again")
+            print(e);
+            print("connection failed try again");
             self.open_db_connection()
             
     def close_db_connection(self):
